@@ -5,6 +5,16 @@ plugins {
     id 'application'
 }
 
+project.ext.lwjglVersion = "3.2.3"
+switch (OperatingSystem.current()) {
+	case OperatingSystem.LINUX:
+		project.ext.lwjglNatives = "natives-linux-arm64"
+		break
+	case OperatingSystem.WINDOWS:
+		project.ext.lwjglNatives = "natives-windows"
+		break
+}
+
 repositories {
     jcenter()
 	mavenCentral()
