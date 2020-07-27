@@ -1,6 +1,7 @@
 import org.gradle.internal.os.OperatingSystem
 
 plugins {
+	 id 'com.github.johnrengelman.shadow' version '6.0.0'
     id 'java'
     id 'application'
 }
@@ -94,6 +95,13 @@ dependencies {
 	runtimeOnly "org.lwjgl:lwjgl-xxhash::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-yoga::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-zstd::$lwjglNatives"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'jin.HelloLWJGL'
+    }
+    archiveName = 'jin.jar'
 }
 
 application {
