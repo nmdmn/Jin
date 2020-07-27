@@ -8,7 +8,7 @@ plugins {
 project.ext.lwjglVersion = "3.2.3"
 switch (OperatingSystem.current()) {
 	case OperatingSystem.LINUX:
-		project.ext.lwjglNatives = "natives-linux-arm64"
+		project.ext.lwjglNatives = "natives-linux"
 		break
 	case OperatingSystem.WINDOWS:
 		project.ext.lwjglNatives = "natives-windows"
