@@ -1,6 +1,7 @@
 import org.gradle.internal.os.OperatingSystem
 
 plugins {
+	id 'com.github.johnrengelman.shadow' version '6.0.0'
     id 'java'
     id 'application'
 }
@@ -94,6 +95,19 @@ dependencies {
 	runtimeOnly "org.lwjgl:lwjgl-xxhash::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-yoga::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-zstd::$lwjglNatives"
+}
+
+task makeJar(type: Jar) {
+	manifest {
+		attributes 'Main-Class': 'jin.HelloLWJGL'
+		attributes 'Description': 'This is an application JAR'
+	}
+}
+
+shadowJar {
+  manifest {
+    inheritFrom project.tasks.makeJar.manifest
+  }
 }
 
 application {
