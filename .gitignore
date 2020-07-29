@@ -9,3 +9,10 @@ bin/
 .project
 .classpath
 .settings/
+
+# Ignore cscope, tags and gtags databases
+GPATH
+GRTAGS
+GTAGS
+cscope.out
+tags
