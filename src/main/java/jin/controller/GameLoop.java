@@ -1,5 +1,6 @@
 package jin.controller;
 
+import jin.view.Program;
 import jin.view.Renderer;
 import jin.view.Window;
 
@@ -18,6 +19,7 @@ public class GameLoop {
 	public static void main(String[] args) {
 		Window window = new Window("Jin - The badass java 3D engine", 800, 600);
 		Renderer renderer = new Renderer();
+		Program program = new Program("basic_shader.vs", "basic_shader.fs");
 		while (window.isRunning()) {
 			renderer.clear();
 

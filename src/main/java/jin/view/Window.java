@@ -28,7 +28,7 @@ public class Window {
 	 * @param width Initial window width
 	 * @param height Initial window Height
 	 */
-	public Window(String title, int width, int height) throws IllegalStateException {
+	public Window(String title, int width, int height) {
 		initializeGlfw();
 		setWindowHints();
 		createWindow(title, width, height);
@@ -66,7 +66,7 @@ public class Window {
 	private void createWindow(String title, int width, int height) {
 		windowId = glfwCreateWindow(width, height, title, NULL, NULL);
 		if (NULL == windowId)
-			throw new IllegalStateException("glfwCreateWindow() failed!");
+			throw new AssertionError("glfwCreateWindow() failed!");
 	}
 
 	private void setWindowHints() {
@@ -78,7 +78,7 @@ public class Window {
 	private void initializeGlfw() {
 		GLFWErrorCallback.createPrint(System.err).set();
 		if (!glfwInit())
-			throw new IllegalStateException("glfwInit() failed!");
+			throw new AssertionError("glfwInit() failed!");
 	}
 
 	private void keyChangedCallback(long windowId, int key, int scancode, int action, int mods) {
