@@ -4,7 +4,7 @@ import jin.view.Renderer;
 import jin.view.Window;
 
 /**
- * <p>Implementing basic game-loop</p>
+ * <p>Implementing basic game-loop
  * @author nmd
  * @version 1.0
  * @since 2020-07-30

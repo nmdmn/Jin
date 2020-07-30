@@ -8,9 +8,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
 /**
- * <p>Class representing a GLWF window and add a basic interface to interact with.
- * <i>Based ont Thinkmatrix tutorials: <a
- * href="https://youtu.be/VS8wlS9hF8E?list=PLRIWtICgwaX0u7Rf9zkZhLoLuZVfUksDP">link to youtube</a></i>
+ * <p>Class representing a GLWF window and add a basic interface to interact with
  * @author nmd
  * @version 1.0
  * @since 2020-07-30
@@ -45,7 +43,7 @@ public class Window {
 	public boolean isRunning() { return !glfwWindowShouldClose(windowId); }
 
 	/**
-	 * <p>Handle events, here is where our callbacks would be called.
+	 * <p>Handle events, here is where our callbacks would be called
 	 */
 	public void pollEvents() { glfwPollEvents(); }
 
