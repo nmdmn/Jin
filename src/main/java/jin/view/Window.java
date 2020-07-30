@@ -17,7 +17,7 @@ public class Window {
 	private long windowId;
 
 	/**
-	 * Get the GLFW window ID
+	 * <p>Get the GLFW window ID
 	 * @return ID representing a GLFW window
 	 */
 	public long getWindowId() { return windowId; }
