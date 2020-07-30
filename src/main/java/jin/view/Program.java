@@ -40,8 +40,9 @@ public class Program {
 		}
 		glLinkProgram(programId);
 		if (GL_FALSE == glGetProgrami(programId, GL_LINK_STATUS)) {
-			System.err.println(glGetProgramInfoLog(programId));
-			throw new AssertionError("linking shader program failed!");
+			var glError = glGetProgramInfoLog(programId);
+			throw new AssertionError(String.format("linking shader program failed: %s", glError));
+
 		}
 	}
 
@@ -60,8 +61,8 @@ public class Program {
 		glShaderSource(shaderId, shaderSource);
 		glCompileShader(shaderId);
 		if (GL_FALSE == glGetShaderi(shaderId, GL_COMPILE_STATUS)) {
-			System.err.println(glGetShaderInfoLog(shaderId));
-			throw new AssertionError("shader compilation failed!");
+			var glError = glGetShaderInfoLog(shaderId);
+			throw new AssertionError(String.format("shader compilation failed: %s", glError));
 		}
 		glAttachShader(programId, shaderId);
 	}
