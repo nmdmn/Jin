@@ -15,6 +15,11 @@ import org.lwjgl.opengl.GL;
  */
 public class Window {
 	private long windowId;
+
+	/**
+	 * Get the GLFW window ID
+	 * @return ID representing a GLFW window
+	 */
 	public long getWindowId() { return windowId; }
 
 	/**
