@@ -16,3 +16,7 @@ GRTAGS
 GTAGS
 cscope.out
 tags
+
+# Ignore Idea project files
+.idea/
+jin.iml
