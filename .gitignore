@@ -9,6 +9,7 @@ bin/
 .project
 .classpath
 .settings/
+.vscode/
 
 # Ignore cscope, tags and gtags databases
 GPATH
