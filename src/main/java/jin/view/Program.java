@@ -4,6 +4,7 @@ import static com.google.common.io.Files.getFileExtension;
 import static org.lwjgl.opengl.GL20.*;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class Program {
 	private static final String VERTEX_SHADER_EXTENSION = "vs";
@@ -38,7 +39,7 @@ public class Program {
 		String shaderSource;
 		try (FileInputStream inputStream = new FileInputStream(SHADER_PATH_PREFIX + filename)) {
 			shaderSource = new String(inputStream.readAllBytes());
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new AssertionError("shader file missing: " + filename);
 		}
 		return shaderSource;
