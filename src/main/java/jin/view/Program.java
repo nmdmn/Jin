@@ -57,7 +57,7 @@ public class Program {
 	}
 
 	private void compileShader(String shaderSource, int shaderType) {
-		String shaderId = glCreateShader(shaderType);
+		int shaderId = glCreateShader(shaderType);
 		glShaderSource(shaderId, shaderSource);
 		glCompileShader(shaderId);
 		if (GL_FALSE == glGetShaderi(shaderId, GL_COMPILE_STATUS)) {
