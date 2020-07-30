@@ -6,6 +6,12 @@ import static org.lwjgl.opengl.GL20.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * <p>Program represents GLSL shader program
+ * @author nmd
+ * @version 1.0
+ * @since 2020-07-30
+ */
 public class Program {
 	private static final String VERTEX_SHADER_EXTENSION = "vs";
 	private static final String FRAGMENT_SHADER_EXTENSION = "fs";
@@ -13,6 +19,10 @@ public class Program {
 
 	private int programId;
 
+	/**
+	 * Load and compile shader files
+	 * @param filenames shader file names relative to <i><project-rool>/shader/</i>
+	 */
 	public Program(String... filenames) {
 		programId = glCreateProgram();
 		for (var filename : filenames) {
