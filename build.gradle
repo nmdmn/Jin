@@ -6,6 +6,25 @@ plugins {
     id 'application'
 }
 
+def mainClass = 'jin.controller.GameLoop'
+
+application {
+    mainClassName = mainClass
+}
+
+task makeJar(type: Jar) {
+	manifest {
+		attributes 'Main-Class': mainClass
+		attributes 'Description': 'This is an application JAR'
+	}
+}
+
+shadowJar {
+  manifest {
+    inheritFrom project.tasks.makeJar.manifest
+  }
+}
+
 project.ext.lwjglVersion = "3.2.3"
 switch (OperatingSystem.current()) {
 	case OperatingSystem.LINUX:
@@ -40,19 +59,4 @@ dependencies {
 	runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
 }
 
-task makeJar(type: Jar) {
-	manifest {
-		attributes 'Main-Class': 'jin.HelloLWJGL'
-		attributes 'Description': 'This is an application JAR'
-	}
-}
 
-shadowJar {
-  manifest {
-    inheritFrom project.tasks.makeJar.manifest
-  }
-}
-
-application {
-    mainClassName = 'jin.HelloLWJGL'
-}
