@@ -21,7 +21,7 @@ public class Program {
 
 	/**
 	 * Load and compile shader files
-	 * @param filenames shader file names relative to <i><project-rool>/shader/</i>
+	 * @param filenames shader file names relative from <i>[project-root]/shader/</i>
 	 */
 	public Program(String... filenames) {
 		programId = glCreateProgram();
