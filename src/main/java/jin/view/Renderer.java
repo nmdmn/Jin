@@ -3,7 +3,7 @@ package jin.view;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
- * <p>OpenGL wrapper class<
+ * <p>OpenGL wrapper class
  * @author nmd
  * @version 1.0
  * @since 2020-07-30
