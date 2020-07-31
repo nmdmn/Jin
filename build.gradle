@@ -6,6 +6,9 @@ plugins {
     id 'application'
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 def mainClass = 'app.BasicRedWindow'
 application {
     mainClassName = mainClass
@@ -71,7 +74,7 @@ dependencies {
 	runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
 
-	compile "org.joml:joml:${jomlVersion}"
+	implementation "org.joml:joml:${jomlVersion}"
 }
 
 
