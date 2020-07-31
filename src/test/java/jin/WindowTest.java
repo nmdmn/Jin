@@ -15,6 +15,6 @@ public class WindowTest {
 	@Test
 	public void testWindow() {
 		Window classUnderTest = new Window("Test window", 800, 600);
-		assertTrue("HelloLWJGL must have window after initialization", classUnderTest.getWindowId() != 0);
+		assertTrue("Window must have a windowId after initialization", classUnderTest.getWindowId() != 0);
 	}
 }
