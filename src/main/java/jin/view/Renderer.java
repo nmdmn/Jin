@@ -2,6 +2,8 @@ package jin.view;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import org.joml.Vector4f;
+
 /**
  * <p>OpenGL wrapper class
  * @author nmd
@@ -10,9 +12,16 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class Renderer {
 	/**
-	 * <p>Set up clear color
+	 * <p>Create Renderer
 	 */
-	public Renderer() { glClearColor(1.f, .0f, .0f, 1.f); }
+	public Renderer() { setClearColor(new Vector4f(0.1f, 0.2f, 0.3f, 1.f)); }
+
+	/**
+	 * <p>Set clear color
+	 */
+	public void setClearColor(Vector4f clearColor) {
+		glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
+	}
 
 	/**
 	 * <p>Clear the color and the depth buffers

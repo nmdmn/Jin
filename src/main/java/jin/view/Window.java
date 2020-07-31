@@ -52,6 +52,19 @@ public class Window {
 	 */
 	public void pollEvents() { glfwPollEvents(); }
 
+	/**
+	 * <p>Set window title
+	 * @param title text will be displayed in the top header of the window
+	 */
+	public void setTitle(String title) { glfwSetWindowTitle(windowId, title); }
+
+	/**
+	 * <p>Set window size
+	 * @param width horizontal size
+	 * @param height vertical size
+	 */
+	public void setSize(int width, int height) { glfwSetWindowSize(windowId, width, height); }
+
 	private void finalizeWindow() {
 		glfwMakeContextCurrent(windowId);
 		glfwShowWindow(windowId);

@@ -10,6 +10,9 @@ import jin.view.Window;
  * @since 2020-07-30
  */
 public abstract class GameLoop {
+	protected Window window = new Window("defualt GLFW window", 800, 600);
+	protected Renderer renderer = new Renderer();
+
 	/**
 	 * <p>Will be called before game-loop starts
 	 */
@@ -24,8 +27,6 @@ public abstract class GameLoop {
 	 * <p>Create window, renderer and start the game-loop
 	 */
 	public void start() {
-		Window window = new Window("Jin - The badass java 3D engine", 800, 600);
-		Renderer renderer = new Renderer();
 		create();
 		while (window.isRunning()) {
 			renderer.clear();
