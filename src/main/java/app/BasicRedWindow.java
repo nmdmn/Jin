@@ -14,7 +14,7 @@ public class BasicRedWindow extends GameLoop {
 	public Program program = new Program("BasicRedWindow/basic_shader.vs", "BasicRedWindow/basic_shader.fs");
 
 	@Override
-	protected void create() {
+	protected void setup() {
 		window.setTitle("Jin - The badass 3D engine");
 		window.setSize(1280, 720);
 		renderer.setClearColor(new Vector4f(1.f, 0.f, 0.f, 1.f));

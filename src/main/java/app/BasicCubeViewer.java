@@ -5,7 +5,7 @@ import jin.controller.GameLoop;
 public class BasicCubeViewer extends GameLoop {
 
 	@Override
-	protected void create() {}
+	protected void setup() {}
 
 	@Override
 	protected void update() {}

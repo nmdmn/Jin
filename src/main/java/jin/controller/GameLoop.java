@@ -16,7 +16,7 @@ public abstract class GameLoop {
 	/**
 	 * <p>Will be called before game-loop starts
 	 */
-	protected abstract void create();
+	protected abstract void setup();
 
 	/**
 	 * <p>Will be called every iteration
@@ -27,7 +27,7 @@ public abstract class GameLoop {
 	 * <p>Create window, renderer and start the game-loop
 	 */
 	public void start() {
-		create();
+		setup();
 		while (window.isRunning()) {
 			renderer.clear();
 
