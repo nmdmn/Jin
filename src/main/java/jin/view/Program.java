@@ -42,9 +42,18 @@ public class Program {
 		if (GL_FALSE == glGetProgrami(programId, GL_LINK_STATUS)) {
 			String glError = glGetProgramInfoLog(programId);
 			throw new AssertionError(String.format("linking shader program failed: %s", glError));
-
 		}
 	}
+
+	/**
+	 * Enable shader program
+	 */
+	public void on() { glUseProgram(programId); }
+
+	/**
+	 * Disable shader program
+	 */
+	public void off() { glUseProgram(0); }
 
 	private String loadShader(String filename) {
 		String shaderSource;

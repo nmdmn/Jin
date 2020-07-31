@@ -6,10 +6,15 @@ plugins {
     id 'application'
 }
 
-def mainClass = 'jin.controller.GameLoop'
+def mainClass = 'app.BasicRedWindow'
 
 application {
     mainClassName = mainClass
+}
+
+task(runBasicRedWindow, dependsOn: 'classes', type: JavaExec) {
+   main = 'app.BasicRedWindow'
+   classpath = sourceSets.main.runtimeClasspath
 }
 
 task makeJar(type: Jar) {

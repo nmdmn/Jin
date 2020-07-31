@@ -1,6 +1,5 @@
 package jin.controller;
 
-import jin.view.Program;
 import jin.view.Renderer;
 import jin.view.Window;
 
@@ -10,20 +9,28 @@ import jin.view.Window;
  * @version 1.0
  * @since 2020-07-30
  */
-public class GameLoop {
+public abstract class GameLoop {
+	/**
+	 * <p>Will be called before game-loop starts
+	 */
+	protected abstract void create();
+
+	/**
+	 * <p>Will be called every iteration
+	 */
+	protected abstract void update();
 
 	/**
 	 * <p>Create window, renderer and start the game-loop
-	 * @param args not used
 	 */
-	public static void main(String[] args) {
+	public void start() {
 		Window window = new Window("Jin - The badass java 3D engine", 800, 600);
 		Renderer renderer = new Renderer();
-		Program program = new Program("basic_shader.vs", "basic_shader.fs");
+		create();
 		while (window.isRunning()) {
 			renderer.clear();
 
-			// TODO game logic
+			update();
 
 			window.swap();
 			window.pollEvents();
