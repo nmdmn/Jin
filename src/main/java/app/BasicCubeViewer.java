@@ -1,7 +1,5 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.List;
 import jin.controller.GameLoop;
 import org.joml.Vector3f;
 
