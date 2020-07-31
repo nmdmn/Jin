@@ -25,8 +25,8 @@ public class Program {
 	 */
 	public Program(String... filenames) {
 		programId = glCreateProgram();
-		for (var filename : filenames) {
-			var shaderFileExtension = getFileExtension(filename);
+		for (String filename : filenames) {
+			String shaderFileExtension = getFileExtension(filename);
 			switch (shaderFileExtension) {
 			case VERTEX_SHADER_EXTENSION:
 				compileShader(loadShader(filename), GL_VERTEX_SHADER);
@@ -40,11 +40,20 @@ public class Program {
 		}
 		glLinkProgram(programId);
 		if (GL_FALSE == glGetProgrami(programId, GL_LINK_STATUS)) {
-			var glError = glGetProgramInfoLog(programId);
+			String glError = glGetProgramInfoLog(programId);
 			throw new AssertionError(String.format("linking shader program failed: %s", glError));
-
 		}
 	}
+
+	/**
+	 * Enable shader program
+	 */
+	public void on() { glUseProgram(programId); }
+
+	/**
+	 * Disable shader program
+	 */
+	public void off() { glUseProgram(0); }
 
 	private String loadShader(String filename) {
 		String shaderSource;
@@ -57,11 +66,11 @@ public class Program {
 	}
 
 	private void compileShader(String shaderSource, int shaderType) {
-		var shaderId = glCreateShader(shaderType);
+		int shaderId = glCreateShader(shaderType);
 		glShaderSource(shaderId, shaderSource);
 		glCompileShader(shaderId);
 		if (GL_FALSE == glGetShaderi(shaderId, GL_COMPILE_STATUS)) {
-			var glError = glGetShaderInfoLog(shaderId);
+			String glError = glGetShaderInfoLog(shaderId);
 			throw new AssertionError(String.format("shader compilation failed: %s", glError));
 		}
 		glAttachShader(programId, shaderId);

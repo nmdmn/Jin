@@ -6,10 +6,15 @@ plugins {
     id 'application'
 }
 
-def mainClass = 'jin.controller.GameLoop'
+def mainClass = 'app.BasicRedWindow'
 
 application {
     mainClassName = mainClass
+}
+
+task(runBasicRedWindow, dependsOn: 'classes', type: JavaExec) {
+   main = 'app.BasicRedWindow'
+   classpath = sourceSets.main.runtimeClasspath
 }
 
 task makeJar(type: Jar) {
@@ -34,10 +39,14 @@ switch (OperatingSystem.current()) {
 		project.ext.lwjglNatives = "natives-windows"
 		break
 }
+project.ext.jomlVersion = "1.9.25"
 
 repositories {
     jcenter()
 	mavenCentral()
+	maven {
+    	url "https://oss.sonatype.org/content/repositories/snapshots/"
+	}
 }
 
 dependencies {
@@ -57,6 +66,8 @@ dependencies {
 	runtimeOnly "org.lwjgl:lwjgl-openal::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-opengl::$lwjglNatives"
 	runtimeOnly "org.lwjgl:lwjgl-stb::$lwjglNatives"
+
+	compile "org.joml:joml:${jomlVersion}"
 }
 
 
