@@ -7,13 +7,17 @@ plugins {
 }
 
 def mainClass = 'app.BasicRedWindow'
-
 application {
     mainClassName = mainClass
 }
 
 task(runBasicRedWindow, dependsOn: 'classes', type: JavaExec) {
    main = 'app.BasicRedWindow'
+   classpath = sourceSets.main.runtimeClasspath
+}
+
+task(runBasicCubeViewer, dependsOn: 'classes', type: JavaExec) {
+   main = 'app.BasicCubeViewer'
    classpath = sourceSets.main.runtimeClasspath
 }
 
