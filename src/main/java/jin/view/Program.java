@@ -18,6 +18,7 @@ public class Program {
 	private static final String SHADER_PATH_PREFIX = "shader/";
 
 	private int programId;
+	private UniformManager uniformManager;
 
 	/**
 	 * Load and compile shader files
@@ -25,6 +26,8 @@ public class Program {
 	 */
 	public Program(String... filenames) {
 		programId = glCreateProgram();
+		uniformManager = new UniformManager(programId);
+
 		for (String filename : filenames) {
 			String shaderFileExtension = getFileExtension(filename);
 			switch (shaderFileExtension) {
@@ -43,6 +46,8 @@ public class Program {
 			String glError = glGetProgramInfoLog(programId);
 			throw new AssertionError(String.format("linking shader program failed: %s", glError));
 		}
+
+		uniformManager.readUniformLocations();
 	}
 
 	/**
@@ -55,10 +60,19 @@ public class Program {
 	 */
 	public void off() { glUseProgram(0); }
 
+	/**
+	 * Gets uniform data for the given uniform name.
+	 * @param name the name of the uniform
+	 */
+	public UniformManager.UniformData getUniform(String name) {
+		return uniformManager.get(name);
+	}
+
 	private String loadShader(String filename) {
 		String shaderSource;
 		try (FileInputStream inputStream = new FileInputStream(SHADER_PATH_PREFIX + filename)) {
 			shaderSource = new String(inputStream.readAllBytes());
+			uniformManager.getUniformsFrom(shaderSource);
 		} catch (IOException e) {
 			throw new AssertionError("shader file missing: " + filename);
 		}
@@ -75,4 +89,5 @@ public class Program {
 		}
 		glAttachShader(programId, shaderId);
 	}
+
 }
