@@ -90,7 +90,14 @@ public class UniformManager {
 	 * @param uniformName the name of the uniform
 	 */
 	public UniformData get(String uniformName) {
-		return uniforms.get(uniformName);
+		UniformData uniform = uniforms.get(uniformName);
+
+		if (uniform == null)
+			throw new AssertionError(String.format(
+				"The given uniform (%s) was not found", uniformName
+			));
+
+		return uniform;
 	}
 
 	/**
