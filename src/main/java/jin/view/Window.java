@@ -67,7 +67,6 @@ public class Window {
 	private void finalizeWindow() {
 		glfwMakeContextCurrent(windowId);
 		glfwShowWindow(windowId);
-		// XXX this will be a headache here later (threading issues)
 	}
 
 	private void setCallbacks() {
