@@ -1,11 +1,12 @@
-package app;
+package app.basicCubeViewer;
 
 import jin.controller.GameLoop;
 import org.joml.Vector3f;
 
 /**
- * <p>Draw a cube
- * Note that the vertex data is hardcoded
+ * <p>
+ * Draw a cube Note that the vertex data is hardcoded
+ *
  * @author nmd
  * @version 1.0
  * @since 2020-07-31

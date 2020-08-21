@@ -1,4 +1,4 @@
-package app;
+package app.basicRedWindow;
 
 import jin.controller.GameLoop;
 import jin.view.Program;
