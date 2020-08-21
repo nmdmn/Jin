@@ -9,18 +9,18 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def mainClass = 'app.BasicRedWindow'
+def mainClass = 'app.basicRedWindow.BasicRedWindow'
 application {
     mainClassName = mainClass
 }
 
 task(runBasicRedWindow, dependsOn: 'classes', type: JavaExec) {
-   main = 'app.BasicRedWindow'
+   main = 'app.basicRedWindow.BasicRedWindow'
    classpath = sourceSets.main.runtimeClasspath
 }
 
 task(runBasicCubeViewer, dependsOn: 'classes', type: JavaExec) {
-   main = 'app.BasicCubeViewer'
+   main = 'app.basicCubeViewer.BasicCubeViewer'
    classpath = sourceSets.main.runtimeClasspath
 }
 
