@@ -5,7 +5,7 @@ import org.joml.Vector3f;
 
 /**
  * <p>
- * Draw a cube Note that the vertex data is hardcoded
+ * Draw a cube, note that the vertex data is hardcoded
  *
  * @author nmd
  * @version 1.0
