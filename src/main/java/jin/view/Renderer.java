@@ -3,6 +3,7 @@ package jin.view;
 import static org.lwjgl.opengl.GL11.*;
 
 import org.joml.Vector4f;
+import org.lwjgl.opengl.GL;
 
 /**
  * <p>OpenGL wrapper class
@@ -14,7 +15,10 @@ public class Renderer {
 	/**
 	 * <p>Create Renderer
 	 */
-	public Renderer() { setClearColor(new Vector4f(0.1f, 0.2f, 0.3f, 1.f)); }
+	public Renderer() {
+		GL.createCapabilities();
+		setClearColor(new Vector4f(0.1f, 0.2f, 0.3f, 1.f));
+	}
 
 	/**
 	 * <p>Set clear color

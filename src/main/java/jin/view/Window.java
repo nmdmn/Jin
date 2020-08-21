@@ -5,7 +5,6 @@ import static org.lwjgl.opengl.GL11.glViewport;
 import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.opengl.GL;
 
 /**
  * <p>Class representing a GLWF window and add a basic interface to interact with
@@ -68,7 +67,7 @@ public class Window {
 	private void finalizeWindow() {
 		glfwMakeContextCurrent(windowId);
 		glfwShowWindow(windowId);
-		GL.createCapabilities(); // XXX this will be a headache here later (threading issues)
+		// XXX this will be a headache here later (threading issues)
 	}
 
 	private void setCallbacks() {
