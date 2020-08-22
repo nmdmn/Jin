@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL20.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import jin.model.UniformManager;
 
 /**
  * <p>Program represents GLSL shader program
@@ -46,8 +47,7 @@ public class Program {
 			String glError = glGetProgramInfoLog(programId);
 			throw new AssertionError(String.format("linking shader program failed: %s", glError));
 		}
-
-		uniformManager.readUniformLocations();
+		uniformManager.getUniformsFrom(programId);
 	}
 
 	/**
@@ -64,15 +64,12 @@ public class Program {
 	 * Gets uniform data for the given uniform name.
 	 * @param name the name of the uniform
 	 */
-	public UniformManager.UniformData getUniform(String name) {
-		return uniformManager.get(name);
-	}
+	public UniformManager.UniformData getUniform(String name) { return uniformManager.get(name); }
 
 	private String loadShader(String filename) {
 		String shaderSource;
 		try (FileInputStream inputStream = new FileInputStream(SHADER_PATH_PREFIX + filename)) {
 			shaderSource = new String(inputStream.readAllBytes());
-			uniformManager.getUniformsFrom(shaderSource);
 		} catch (IOException e) {
 			throw new AssertionError("shader file missing: " + filename);
 		}
@@ -89,5 +86,4 @@ public class Program {
 		}
 		glAttachShader(programId, shaderId);
 	}
-
 }

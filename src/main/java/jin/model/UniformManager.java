@@ -1,8 +1,10 @@
-package jin.view;
-
-import gnu.trove.map.hash.THashMap;
+package jin.model;
 
 import static org.lwjgl.opengl.GL20.*;
+
+import gnu.trove.map.hash.THashMap;
+import java.nio.IntBuffer;
+import org.lwjgl.system.MemoryStack;
 
 /**
  * <p>Utility class to handle uniforms.
@@ -19,15 +21,17 @@ public class UniformManager {
 	 * <p>Holds data that describes a uniform.
 	 */
 	public static class UniformData {
-		private final String type;
+		private final int type;
+		private final int size;
 		private final String name;
 		private int location;
 
 		/**
 		 * Creates a UniformData from its type, name and location.
 		 */
-		public UniformData(String type, String name, int location) {
+		public UniformData(int type, int size, String name, int location) {
 			this.type = type;
+			this.size = size;
 			this.name = name;
 			this.location = location;
 		}
@@ -36,41 +40,37 @@ public class UniformManager {
 		 * Creates a UniformData from its type and name.
 		 * The location is initialized to -1.
 		 */
-		public UniformData(String type, String name) {
-			this(type, name, -1);
-		}
+		public UniformData(int type, int size, String name) { this(type, size, name, -1); }
 
 		/**
 		 * Gets the uniform type.
 		 * @return the uniform type
 		 */
-		public String getType() {
-			return type;
-		}
+		public int getType() { return type; }
+
+		/**
+		 * Gets the uniform size.
+		 * @return the uniform size
+		 */
+		public int getSize() { return size; }
 
 		/**
 		 * Gets the uniform name.
 		 * @return the uniform name
 		 */
-		public String getName() {
-			return name;
-		}
+		public String getName() { return name; }
 
 		/**
 		 * Gets the uniform location.
 		 * @return the uniform location
 		 */
-		public int getLocation() {
-			return location;
-		}
+		public int getLocation() { return location; }
 
 		/**
 		 * Sets the uniform location.
 		 * @param locaiton the uniform location
 		 */
-		public void setLocation(int location) {
-			this.location = location;
-		}
+		public void setLocation(int location) { this.location = location; }
 	}
 
 	private THashMap<String, UniformData> uniforms;
@@ -93,9 +93,7 @@ public class UniformManager {
 		UniformData uniform = uniforms.get(uniformName);
 
 		if (uniform == null)
-			throw new AssertionError(String.format(
-				"The given uniform (%s) was not found", uniformName
-			));
+			throw new AssertionError(String.format("The given uniform (%s) was not found", uniformName));
 
 		return uniform;
 	}
@@ -104,42 +102,20 @@ public class UniformManager {
 	 * Parses the shader text for uniforms.
 	 * @param program the shader to parse
 	 */
-	public void getUniformsFrom(String program) {
-		program.lines().forEach(s -> {
-			String line = s.trim();
-			if (line.startsWith("uniform")) {
-				String[] elements = line.split("[\\s,;]");
-
-				if (elements.length < 3)
-					throw new AssertionError(String.format("Unable to parse shader line: %s", line));
-
-				String type = elements[1];
-
-				for (int i = 2; i < elements.length; ++i) {
-					if (uniforms.get(elements[i]) != null)
-						throw new AssertionError(String.format(
-							"UniformManager already contains uniform: %s", elements[i]
-						));
-					uniforms.put(elements[i], new UniformData(type, elements[i]));
-				}
+	public void getUniformsFrom(int programId) {
+		try (MemoryStack stack = MemoryStack.stackPush()) {
+			IntBuffer uniformCount = stack.callocInt(1);
+			glGetProgramiv(programId, GL_ACTIVE_UNIFORMS, uniformCount);
+			for (int i = 0; i < uniformCount.get(0); i++) {
+				IntBuffer size = stack.callocInt(1);
+				IntBuffer type = stack.callocInt(1);
+				String name = glGetActiveUniform(programId, i, size, type);
+				UniformData uniform = new UniformData(type.get(), size.get(), name);
+				uniform.setLocation(glGetUniformLocation(programId, name));
+				if (uniform.getLocation() == -1)
+					throw new AssertionError(String.format("Uniform (%s) location could not be retrieved", name));
+				uniforms.put(name, uniform);
 			}
-		});
-	}
-
-	/**
-	 * Reads the uniform locations form the linked shader.
-	 */
-	public void readUniformLocations() {
-		uniforms.forEachValue(o -> {
-			UniformData data = (UniformData)o;
-			data.setLocation(glGetUniformLocation(programId, data.getName()));
-
-			if (data.getLocation() == -1)
-				throw new AssertionError(String.format(
-					"Uniform (%s) location could not be retrieved", data.getName()
-				));
-
-			return true;
-		});
+		}
 	}
 }
