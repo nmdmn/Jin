@@ -1,6 +1,7 @@
 package app.basicCubeViewer;
 
 import jin.controller.GameLoop;
+import jin.view.Program;
 import org.joml.Vector3f;
 
 /**
@@ -12,11 +13,13 @@ import org.joml.Vector3f;
  * @since 2020-07-31
  */
 public class BasicCubeViewer extends GameLoop {
-
-	private static Vertex[] cubeVertices = generateCubeVertices(1.f);
+	public Program program;
 
 	@Override
-	protected void setup() {}
+	protected void setup() {
+		window.setTitle("Jin - A cube!@#$%^&*()_+");
+		program = new Program("BasicCubeViewer/cube.vs", "BasicCubeViewer/cube.fs");
+	}
 
 	@Override
 	protected void update() {}

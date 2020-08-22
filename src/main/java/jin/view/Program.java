@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL20.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import jin.model.ShaderVariableManager;
 
 /**
  * <p>Program represents GLSL shader program
@@ -18,6 +19,7 @@ public class Program {
 	private static final String SHADER_PATH_PREFIX = "shader/";
 
 	private int programId;
+	private ShaderVariableManager shaderVariableManager;
 
 	/**
 	 * Load and compile shader files
@@ -43,6 +45,8 @@ public class Program {
 			String glError = glGetProgramInfoLog(programId);
 			throw new AssertionError(String.format("linking shader program failed: %s", glError));
 		}
+
+		shaderVariableManager = new ShaderVariableManager(programId);
 	}
 
 	/**
