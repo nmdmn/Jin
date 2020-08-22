@@ -27,8 +27,8 @@ public class ShaderVariableManager {
 		}
 	}
 
-	private Map<String, ShaderVariable> attributes;
-	private Map<String, ShaderVariable> uniforms;
+	private final Map<String, ShaderVariable> attributes;
+	private final Map<String, ShaderVariable> uniforms;
 
 	public ShaderVariableManager(int programId) {
 		attributes = getActiveAttributes(programId);
