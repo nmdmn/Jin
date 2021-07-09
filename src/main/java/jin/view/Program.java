@@ -3,7 +3,7 @@ package jin.view;
 import static com.google.common.io.Files.getFileExtension;
 import static org.lwjgl.opengl.GL20.*;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.IOException;
 import jin.model.UniformManager;
 
@@ -68,7 +68,9 @@ public class Program {
 
 	private String loadShader(String filename) {
 		String shaderSource;
-		try (FileInputStream inputStream = new FileInputStream(SHADER_PATH_PREFIX + filename)) {
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+;
+		try (InputStream inputStream = classloader.getResourceAsStream(SHADER_PATH_PREFIX + filename)) {
 			shaderSource = new String(inputStream.readAllBytes());
 		} catch (IOException e) {
 			throw new AssertionError("shader file missing: " + filename);
