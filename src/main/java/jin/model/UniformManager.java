@@ -25,9 +25,9 @@ public class UniformManager {
 	 */
 	@Data @AllArgsConstructor
 	public static class UniformData {
-		private int type;
-		private int size;
-		private String name;
+		private final int type;
+		private final int size;
+		private final String name;
 		private int location;
 
 		/**
