@@ -68,9 +68,8 @@ public class Program {
 
 	private String loadShader(String filename) {
 		String shaderSource;
-		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-;
-		try (InputStream inputStream = classloader.getResourceAsStream(SHADER_PATH_PREFIX + filename)) {
+
+		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(SHADER_PATH_PREFIX + filename)) {
 			shaderSource = new String(inputStream.readAllBytes());
 		} catch (IOException e) {
 			throw new AssertionError("shader file missing: " + filename);
