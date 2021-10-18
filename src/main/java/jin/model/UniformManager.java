@@ -2,7 +2,9 @@ package jin.model;
 
 import static org.lwjgl.opengl.GL20.*;
 
-import gnu.trove.map.hash.THashMap;
+import java.util.HashMap;
+import java.util.Map;
+
 import java.nio.IntBuffer;
 import org.lwjgl.system.MemoryStack;
 
@@ -37,7 +39,7 @@ public class UniformManager {
 		public UniformData(int type, int size, String name) { this(type, size, name, -1); }
 	}
 
-	private THashMap<String, UniformData> uniforms;
+	private Map<String, UniformData> uniforms;
 	private int programId;
 
 	/**
@@ -45,7 +47,7 @@ public class UniformManager {
 	 * @param programId the ID of the program that is parsed for uniforms
 	 */
 	public UniformManager(int programId) {
-		uniforms = new THashMap<>();
+		uniforms = new HashMap<>();
 		this.programId = programId;
 	}
 

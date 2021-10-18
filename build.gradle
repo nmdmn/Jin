@@ -84,4 +84,3 @@ compileJava {
 	options.deprecation = true
 	options.compilerArgs += ["-Xlint:all"]
 }
-
