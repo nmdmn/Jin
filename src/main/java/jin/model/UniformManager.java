@@ -8,6 +8,9 @@ import java.util.Map;
 import java.nio.IntBuffer;
 import org.lwjgl.system.MemoryStack;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 /**
  * <p>Utility class to handle uniforms.
  * Uniform are referenced by name and spelling errors can result
@@ -22,6 +25,7 @@ public class UniformManager {
 	/**
 	 * <p>Holds data that describes a uniform.
 	 */
+	@Data @AllArgsConstructor
 	public static class UniformData {
 		private final int type;
 		private final int size;
@@ -29,50 +33,10 @@ public class UniformManager {
 		private int location;
 
 		/**
-		 * Creates a UniformData from its type, name and location.
-		 */
-		public UniformData(int type, int size, String name, int location) {
-			this.type = type;
-			this.size = size;
-			this.name = name;
-			this.location = location;
-		}
-
-		/**
 		 * Creates a UniformData from its type and name.
 		 * The location is initialized to -1.
 		 */
 		public UniformData(int type, int size, String name) { this(type, size, name, -1); }
-
-		/**
-		 * Gets the uniform type.
-		 * @return the uniform type
-		 */
-		public int getType() { return type; }
-
-		/**
-		 * Gets the uniform size.
-		 * @return the uniform size
-		 */
-		public int getSize() { return size; }
-
-		/**
-		 * Gets the uniform name.
-		 * @return the uniform name
-		 */
-		public String getName() { return name; }
-
-		/**
-		 * Gets the uniform location.
-		 * @return the uniform location
-		 */
-		public int getLocation() { return location; }
-
-		/**
-		 * Sets the uniform location.
-		 * @param locaiton the uniform location
-		 */
-		public void setLocation(int location) { this.location = location; }
 	}
 
 	private Map<String, UniformData> uniforms;
@@ -101,8 +65,11 @@ public class UniformManager {
 	}
 
 	/**
-	 * Parses the shader text for uniforms.
-	 * @param program the shader to parse
+	 * Gets the uniforms of a program.
+	 * Stores the uniforms in a map with their
+	 * name as the key.
+	 *
+	 * @param programId the program to process
 	 */
 	public void getUniformsFrom(int programId) {
 		try (MemoryStack stack = MemoryStack.stackPush()) {

@@ -21,3 +21,6 @@ tags
 # Ignore Idea project files
 .idea/
 jin.iml
+
+# Ignore Lombok auto config
+lombok.config
